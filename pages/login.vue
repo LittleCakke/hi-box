@@ -203,7 +203,7 @@
     import CodeInput from "~/components/login/CodeInput.vue";
     import Icon from "~/components/Icon.vue";
 
-    const { $userApi } = useNuxtApp();
+    const { $userApi, $md5 } = useNuxtApp();
 
     let step = ref(0);
     let isCodeLogin = ref(true);
@@ -263,9 +263,69 @@
     const pwdLogin = async () =>
     {
         loading.value = true;
+        let result = await $userApi.login({
+            phone: phone.value,
+            password: $md5.hashStr(password.value)
+        });
+        loading.value = false;
 
-        // TODO
+        if (result.code == 200)
+        {
+            message.success("登录成功");
+            localStorage.setItem("token", `${result.data}`);
+
+            navigateTo("/home");
+        }
+        else
+        {
+            message.error(result.msg || "手机号或密码错误");
+        }
     }
+
+    watch(() => code.value, async v =>
+    {
+        if (v.length == 4)
+        {
+            loading.value = true;
+            let result = await $userApi.login({
+                phone: phone.value,
+                code: code.value
+            });
+            loading.value = false;
+
+            if (result.code == 200)
+            {
+                message.success("登录成功");
+                localStorage.setItem("token", `${result.data}`);
+
+                navigateTo("/home");
+            }
+            else
+            {
+                message.error(result.msg || "手机号或验证码错误");
+            }
+        }
+        else if (v.length > 4)
+        {
+            code.value = v.substring(0, 4);
+            message.error("验证码长度不可超过4位");
+        }
+    });
+
+    watch(() => isCodeLogin.value, () =>
+    {
+        step.value = 0;
+        code.value = "";
+        password.value = "";
+        loading.value = false;
+    });
+
+    onMounted(() =>
+    {
+        let token = localStorage.getItem("token");
+
+        if (token) navigateTo("/home");
+    });
 
     onBeforeUnmount(() =>
     {
