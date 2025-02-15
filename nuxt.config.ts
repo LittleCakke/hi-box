@@ -25,7 +25,7 @@ export default defineNuxtConfig({
     nitro: {
         devProxy: {
             "/api": {
-                target: `${process.env.HI_BOX_PROXY_TARGET_HOST}:${process.env.HI_BOX_PROXY_TARGET_PORT}`,
+                target: `http://${process.env.HI_BOX_PROXY_TARGET_HOST}:${process.env.HI_BOX_PROXY_TARGET_PORT}`,
                 changeOrigin: true
             }
         }

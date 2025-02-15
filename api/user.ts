@@ -1,9 +1,10 @@
 import req from "~/utils/req";
+import type { Result } from "~/type";
 
 export const userApi = {
-    login: (user: any) => req({
-        url: "/user/login",
-        method: "POST",
-        data: user
+    getPhoneCode: (phone: string) => req<any, Result<any>>({
+        url: "/user/send-msg",
+        method: "GET",
+        params: { phone }
     })
 }

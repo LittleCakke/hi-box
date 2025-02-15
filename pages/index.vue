@@ -23,8 +23,9 @@
             <van-tabbar-item
                 to="/post">
                 <div
-                    class="w-[50px] h-[40px] rounded-md bg-blue-500 flex items-center justify-center">
+                    class="w-[40px] h-[30px] rounded-md bg-blue-500 flex items-center justify-center">
                     <icon
+                        size="20"
                         class="text-white"
                         name="plus" />
                 </div>
@@ -39,7 +40,7 @@
                         name="user"
                     />
                 </template>
-                个人中心
+                我
             </van-tabbar-item>
         </van-tabbar>
     </section>
