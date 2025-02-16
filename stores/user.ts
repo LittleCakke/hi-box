@@ -4,7 +4,11 @@ export const useUserStore = defineStore("user", {
     state()
     {
         return {
-            loggedUser: {} as User
+            loggedUser: {} as User,
+            isSigned: false,
+            signCount: 0
         }
-    }
+    },
+
+    persist: true
 });

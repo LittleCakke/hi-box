@@ -202,7 +202,7 @@
         </div>
 
         <ul
-            @click="$systemStore.loginPopupShow = true"
+            @click="$systemStore.loginAlertShow = true"
             class="w-full py-4 grid grid-cols-4 border-b border-gray-100">
             <li
                 class="flex flex-col gap-y-1 items-center">

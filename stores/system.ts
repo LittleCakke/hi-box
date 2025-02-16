@@ -3,16 +3,16 @@ export const useSystemStore = defineStore("system", {
     {
         return {
             // 需要登录提示框
-            loginPopupShow: false,
+            loginAlertShow: false,
             // 签到提示框
-            signPopupShow: false,
+            signDialogShow: false,
         }
     },
 
     actions: {
         toLogin()
         {
-            this.loginPopupShow = false;
+            this.loginAlertShow = false;
             navigateTo("/login");
         }
     }

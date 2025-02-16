@@ -254,10 +254,10 @@
 
     const nextStep = async () =>
     {
-        step.value++;
-
         if (isCodeLogin.value)
             await sendMsg();
+
+        step.value++;
     }
 
     const pwdLogin = async () =>
